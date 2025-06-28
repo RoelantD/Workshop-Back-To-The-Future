@@ -18,7 +18,7 @@ Before we dive into the future, let's quickly set you up:
 **1. Understand Your Data (10 mins)**  
   - Learn common pitfalls like bias, missing data, and inconsistency  
   - Discover how to improve data through validation, normalization, and feature engineering  
-  - 
+    
 **2. Explore the Provided Datasets (5 mins)**  
   - Football matches and player stats  
   - Horse racing data  
