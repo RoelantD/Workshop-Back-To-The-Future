@@ -79,4 +79,3 @@ Before we dive into the future, let's quickly set you up:
 - Step-by-step visuals
 - Tips, best practices, and troubleshooting advice
 
-- 
