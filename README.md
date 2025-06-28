@@ -16,22 +16,26 @@ Before we dive into the future, let's quickly set you up:
 
 ### 📝 Your Tasks:
 **1. Understand Your Data (10 mins)**  
-  - Learn common pitfalls like bias, missing data, and inconsistency
-  - Discover how to improve data through validation, normalization, and feature engineering
+  - Learn common pitfalls like bias, missing data, and inconsistency  
+  - Discover how to improve data through validation, normalization, and feature engineering  
+  - 
 **2. Explore the Provided Datasets (5 mins)**  
-  - Football matches and player stats
-  - Horse racing data
-  - Weather records
+  - Football matches and player stats  
+  - Horse racing data  
+  - Weather records  
+    
 **3. Train Your First ML Model with Azure ML Studio (30 mins)**  
-  - Import and clean datasets
-  - Select suitable ML algorithms
+  - Import and clean datasets  
+  - Select suitable ML algorithms  
   - Train and test your predictive models
+
 **4. Set Up Automated Pipelines (15 mins)**  
-  - Automate training, testing, and evaluation
+  - Automate training, testing, and evaluation  
   - Manage training workflows seamlessly
+    
 **5. Deploy Your Model (15 mins)**  
-  - Export your model for real-world use
-  - Validate and confirm your deployment
+  - Export your model for real-world use  
+  - Validate and confirm your deployment  
 
 ## ☕️ Take a Break! (10 mins)
 
