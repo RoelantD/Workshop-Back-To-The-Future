@@ -48,23 +48,23 @@ Before we dive into the future, let's quickly set you up:
 - Predicting outcomes and betting on live sports streams  
 
 ### 📝 Your Tasks:  
-1. Meet Your AI Assistant (5 mins)
+**1. Meet Your AI Assistant (5 mins)**
   - Introduction to agents
   - Real-world examples
-  - 
-2. Build Your Agent in Azure AI Foundry (15 mins)
+    
+**2. Build Your Agent in Azure AI Foundry (15 mins)**
   - Set up your agent environment
   - Customize agent skills and actions
-  - 
-3. Integrate Your ML Model (20 mins)  
+    
+**3. Integrate Your ML Model (20 mins)**  
   - Link your deployed ML model from Part 1
   - Develop prediction logic
-  - 
-4. Connect Your Agent to the Betting API (10 mins)
+    
+**4. Connect Your Agent to the Betting API (10 mins)**
   - Integrate with the provided C# .NET betting API
   - Track bets and manage leaderboard status  
 
-5. Live Prediction Challenge (15 mins)
+**5. Live Prediction Challenge (15 mins)**
   - Connect to live sports data via the service bus  
   - Bet based on your agent’s predictions
   - Watch your performance on the leaderboard  
