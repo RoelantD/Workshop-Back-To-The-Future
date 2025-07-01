@@ -29,3 +29,6 @@ functions = FunctionTool(functions={predict_winner})
 Start the **4_function_calling.py** and ask it *Can you predict a winner?*
 
 It should request more data from you and execute the function to randomly pick the home or away team.
+
+[⏮️ Previous](/part-2/2-3-add-knowledge.md) 
+[⏭️ Next](/part-2/2-5-add-openapi.md)

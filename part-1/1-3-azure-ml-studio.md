@@ -9,3 +9,5 @@ Then, you need to [create a compute instance](/part-1/1-create-ml-compute-instan
 
 While these resources are being created, we are going to explore some machine learning concepts.
 
+[⏮️ Previous](/part-1/1-3-azure-ml-studio.md) 
+[⏭️ Next](/part-1/1-4-regression-models.md) 

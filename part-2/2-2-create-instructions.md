@@ -7,3 +7,6 @@ The agent instructions are a very powerful way in getting our agent to behave an
 Check the [instructions.txt](./code/instructions.txt) file and feel free to change some instructions to see how the agent behaves. Make sure to revert the changes, because we will rely on this **instructions.txt** in the later examples.
 
 Make sure to ask about Doc Browns birthdate again.
+
+[⏮️ Previous](/part-2/2-1-create-vanilla-agent.md) 
+[⏭️ Next](/part-2/2-3-add-knowledge.md)

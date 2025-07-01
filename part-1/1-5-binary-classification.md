@@ -162,3 +162,6 @@ Of course, if we were to change the threshold above which the model predicts *tr
 The ROC curve for a perfect model would go straight up the TPR axis on the left and then across the FPR axis at the top. Since the plot area for the curve measures 1x1, the area under this perfect curve would be 1.0 (meaning that the model is correct 100% of the time). In contrast, a diagonal line from the bottom-left to the top-right represents the results that would be achieved by randomly guessing a binary label; producing an area under the curve of 0.5. In other words, given two possible class labels, you could reasonably expect to guess correctly 50% of the time.
 
 In the case of our diabetes model, the curve above is produced, and the *area under the curve* (AUC) metric is 0.875. Since the AUC is higher than 0.5, we can conclude the model performs better at predicting whether or not a patient has diabetes than randomly guessing.
+
+[⏮️ Previous](/part-1/1-4-regression-models.md) 
+[⏭️ Next](/part-1/1-6-multiclass-classification.md) 

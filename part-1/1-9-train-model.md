@@ -252,3 +252,5 @@ The following statistics are shown for your model:
 
 For each of the error statistics, smaller is better. A smaller value indicates that the predictions are closer to the actual values. For the coefficient of determination, the closer its value is to one (1.0), the better the predictions.
 
+[⏮️ Previous](/part-1/1-8-transformers.md) 
+[⏭️ Next](/part-1/1-10-deploy-model.md)

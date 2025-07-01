@@ -94,3 +94,6 @@ To calculate the overall accuracy, recall, and precision metrics, you use the to
 The overall F1-score is calculated using the overall recall and precision metrics:
 
 - **Overall F1-score** = (2x0.86x0.86)÷(0.86+0.86) = **0.86**  
+
+[⏮️ Previous](/part-1/1-5-binary-classification.md) 
+[⏭️ Next](/part-1/1-7-deep-learning.md) 

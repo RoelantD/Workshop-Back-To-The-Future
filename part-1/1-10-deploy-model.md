@@ -74,3 +74,6 @@ Set the **Authorization header** to *Bearer [KEY]* and use the following test bo
 ```
 
 🥳 You have now succesfully created an endpoint for your newly trained machine learning classification model.
+
+[⏮️ Previous](/part-1/1-9-train-model.md) 
+[⏭️ Next](/part-2/2-1-create-vanilla-agent.md)

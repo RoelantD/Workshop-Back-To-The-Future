@@ -125,3 +125,6 @@ It is now time to run the Python script (make sure you have Python 3.11 or highe
 You can now interact with the agent in the terminal. Play around, but also ask about football and the birthdate of Doc Brown.
 
 Since the LLM has no knowledge of the fictional character Doc Brown, it should respond with a hallucinated value or with a response it does not possess that knowledge.
+
+[⏮️ Previous](/part-1/1-10-deploy-model.md) 
+[⏭️ Next](/part-2/2-2-create-instructions.md)

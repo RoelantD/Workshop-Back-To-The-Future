@@ -1,8 +1,10 @@
 # 📚 Welcome to the Back to the Future AI Workshop: Your Guide to Predictive Sports Agents!
 
 ## Quick links
-[Part 1 - Training your model in Azure Machine Learning Studio](/part-1/
-[Part 2 - Integrate your model in an Agent using Azure AI Foundry Agent Service]
+[Part 1 - Training your model in Azure Machine Learning Studio](/part-1/1-3-azure-ml-studio.md)  
+[Part 2 - Integrate your model in an Agent using Azure AI Foundry Agent Service](/part-2/2-1-create-vanilla-agent.md)
+
+## Workshop outline
 
 🛠 Getting Started (15 mins)
 Before we dive into the future, let's quickly set you up:

@@ -52,3 +52,6 @@ agent = project_client.agents.create_agent(
 ```
 
 Run the Python file, and if we now ask for Doc Browns birthdate, it should be able to reproduce *January 14, 1914* without a problem.
+
+[⏮️ Previous](/part-2/2-2-create-instructions.md) 
+[⏭️ Next](/part-2/2-4-add-tools.md)
