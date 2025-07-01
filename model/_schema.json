@@ -1,0 +1,142 @@
+{
+  "columnAttributes": [
+    {
+      "name": "Year",
+      "type": "Numeric",
+      "isFeature": true,
+      "elementType": {
+        "typeName": "int64",
+        "isNullable": false
+      }
+    },
+    {
+      "name": "Date",
+      "type": "String",
+      "isFeature": true,
+      "elementType": {
+        "typeName": "str",
+        "isNullable": false
+      }
+    },
+    {
+      "name": "Time",
+      "type": "String",
+      "isFeature": true,
+      "elementType": {
+        "typeName": "str",
+        "isNullable": false
+      }
+    },
+    {
+      "name": "City",
+      "type": "String",
+      "isFeature": true,
+      "elementType": {
+        "typeName": "str",
+        "isNullable": false
+      }
+    },
+    {
+      "name": "Weather",
+      "type": "String",
+      "isFeature": true,
+      "elementType": {
+        "typeName": "str",
+        "isNullable": false
+      }
+    },
+    {
+      "name": "HomeTeam",
+      "type": "String",
+      "isFeature": true,
+      "elementType": {
+        "typeName": "str",
+        "isNullable": false
+      }
+    },
+    {
+      "name": "AwayTeam",
+      "type": "String",
+      "isFeature": true,
+      "elementType": {
+        "typeName": "str",
+        "isNullable": false
+      }
+    },
+    {
+      "name": "HomeFPI",
+      "type": "Numeric",
+      "isFeature": true,
+      "elementType": {
+        "typeName": "float64",
+        "isNullable": false
+      }
+    },
+    {
+      "name": "AwayFPI",
+      "type": "Numeric",
+      "isFeature": true,
+      "elementType": {
+        "typeName": "float64",
+        "isNullable": false
+      }
+    },
+    {
+      "name": "HomeOdds",
+      "type": "Numeric",
+      "isFeature": true,
+      "elementType": {
+        "typeName": "float64",
+        "isNullable": false
+      }
+    },
+    {
+      "name": "AwayOdds",
+      "type": "Numeric",
+      "isFeature": true,
+      "elementType": {
+        "typeName": "float64",
+        "isNullable": false
+      }
+    },
+    {
+      "name": "HomeScore",
+      "type": "Numeric",
+      "isFeature": true,
+      "elementType": {
+        "typeName": "int64",
+        "isNullable": false
+      }
+    },
+    {
+      "name": "AwayScore",
+      "type": "Numeric",
+      "isFeature": true,
+      "elementType": {
+        "typeName": "int64",
+        "isNullable": false
+      }
+    },
+    {
+      "name": "Winner",
+      "type": "String",
+      "isFeature": true,
+      "elementType": {
+        "typeName": "str",
+        "isNullable": false
+      }
+    },
+    {
+      "name": "HomeResult",
+      "type": "Numeric",
+      "isFeature": true,
+      "elementType": {
+        "typeName": "int64",
+        "isNullable": false
+      }
+    }
+  ],
+  "featureChannels": [],
+  "labelColumns": {},
+  "scoreColumns": {}
+}

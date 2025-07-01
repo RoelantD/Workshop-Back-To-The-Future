@@ -1,0 +1,6 @@
+azure-identity
+azure-ai-projects
+jsonref
+python-dotenv
+pandas
+tabulate

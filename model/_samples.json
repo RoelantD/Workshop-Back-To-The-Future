@@ -1,0 +1,53 @@
+[
+  {
+    "Year": 1953,
+    "Date": "1953-12-19",
+    "Time": "21:00",
+    "City": "San Francisco",
+    "Weather": "Rain",
+    "HomeTeam": "Team E",
+    "AwayTeam": "Team D",
+    "HomeFPI": 51.91,
+    "AwayFPI": 75.17,
+    "HomeOdds": 2.36,
+    "AwayOdds": 2.48,
+    "HomeScore": 9,
+    "AwayScore": 9,
+    "Winner": "Draw",
+    "HomeResult": 0
+  },
+  {
+    "Year": 1951,
+    "Date": "1951-09-22",
+    "Time": "12:00",
+    "City": "Sacramento",
+    "Weather": "Cloudy",
+    "HomeTeam": "Team P",
+    "AwayTeam": "Team N",
+    "HomeFPI": 59.89,
+    "AwayFPI": 45.0,
+    "HomeOdds": 2.06,
+    "AwayOdds": 1.89,
+    "HomeScore": 10,
+    "AwayScore": 5,
+    "Winner": "Team P",
+    "HomeResult": 1
+  },
+  {
+    "Year": 1964,
+    "Date": "1964-11-15",
+    "Time": "21:00",
+    "City": "San Francisco",
+    "Weather": "Cloudy",
+    "HomeTeam": "Team C",
+    "AwayTeam": "Team N",
+    "HomeFPI": 87.47,
+    "AwayFPI": 84.6,
+    "HomeOdds": 3.18,
+    "AwayOdds": 1.8,
+    "HomeScore": 14,
+    "AwayScore": 16,
+    "Winner": "Team N",
+    "HomeResult": -1
+  }
+]

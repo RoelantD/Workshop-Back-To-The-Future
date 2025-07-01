@@ -1,0 +1,13 @@
+name: ilearner_v2_env
+channels:
+- conda-forge
+- defaults
+dependencies:
+- python=3.8
+- pip=21.0
+- pip:
+  - azureml-core
+  - scikit-learn
+  - numpy
+  - pandas
+  - joblib
