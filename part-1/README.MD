@@ -1,4 +1,4 @@
-### Part 1 Files:
+### Part 1 Files:  
 [1-3-azure-ml-studio.md](1-3-azure-ml-studio.md)  
 [1-4-regression-models.md](1-4-regression-models.md)  
 [1-5-binary-classification.md](1-5-binary-classification.md)  
