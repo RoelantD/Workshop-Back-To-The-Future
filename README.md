@@ -21,7 +21,6 @@ Before we dive into the future, let's quickly set you up:
     
 **2. Explore the Provided Datasets (5 mins)**  
   - Football matches and player stats  
-  - Horse racing data  
   - Weather records  
     
 **3. Train Your First ML Model with Azure ML Studio (30 mins)**  
