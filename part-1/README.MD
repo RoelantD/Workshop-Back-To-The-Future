@@ -8,6 +8,8 @@
 [1-9-train-model.md](1-9-train-model.md)  
 [1-10-deploy-model.md](1-10-deploy-model.md)
 
+[Part 2](/part-2/README.md)
+
 ## Workshop outline
 
 🛠 Getting Started (15 mins)
