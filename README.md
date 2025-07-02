@@ -6,7 +6,7 @@
 [Local - Running LLM locally for making sport match predictions](/local/README.md)
 
 ### Azure Machine Learning Studio workshop
-[Azure - Training your model in Azure Machine Learning studio](/part-1/README.md)  
+[Azure - Training your model in Azure Machine Learning studio](/part-1/README.MD)  
 
 
 
