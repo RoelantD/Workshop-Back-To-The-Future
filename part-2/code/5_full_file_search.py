@@ -48,13 +48,13 @@ with project_client:
     ############################
     # OpenApiTool
     ############################
-    with open(os.path.join(os.path.dirname(__file__), "contoso-pizza.json"), "r") as f:
-            openapi_pizza_api = jsonref.loads(f.read())
+    with open(os.path.join(os.path.dirname(__file__), "/part-2/code/swagger.json"), "r") as f:
+            openapi_betting_api = jsonref.loads(f.read())
 
     openapi_tool = OpenApiTool(
-        name="pizza_api", 
-        spec=openapi_pizza_api, 
-        description="Order pizza, retrieve pizza options, toppings and status", 
+        name="betting_api", 
+        spec=openapi_betting_api, 
+        description="Place bets, retrieve betting options, and check bet status", 
         auth=OpenApiAnonymousAuthDetails()
     )
 

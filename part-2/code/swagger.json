@@ -1,0 +1,87 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Cloudland.Workshop.Sports.API",
+    "version": "1.0"
+  },
+    "servers": [
+    {
+      "url": "https://app-betting-api.azurewebsites.net/api",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/api/bet": {
+      "post": {
+        "tags": [
+          "Cloudland.Workshop.Sports.API"
+        ],
+        "operationId": "PlaceBet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/betting-opportunity": {
+      "get": {
+        "tags": [
+          "Cloudland.Workshop.Sports.API"
+        ],
+        "operationId": "GetCurrentBettingOpportunity",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BetRequest": {
+        "type": "object",
+        "properties": {
+          "betId": {
+            "type": "integer",
+            "description": "The ID of the betting opportunity.",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "string",
+            "description": "The unique identifier of the user placing the bet.",
+            "format": "uuid"
+          },
+          "value": {
+            "type": "integer",
+            "description": "The predicted outcome (e.g., 1=home win, 0=draw, -1=away win).",
+            "format": "int32"
+          },
+          "amount": {
+            "type": "integer",
+            "description": "The amount wagered.",
+            "format": "int32"
+          },
+          "friendlyName": {
+            "type": "string",
+            "description": "A user-friendly name for this bet.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request to place a bet on a football match (betting opportunity)."
+      }
+    }
+  }
+}
