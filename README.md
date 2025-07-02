@@ -3,10 +3,10 @@
 ## Quick links
 
 ### Local model workshop with Ollama
-[Local - Running LLM locally for making sport match predictions](/local/README.md)
+[Local - Running LLM locally for making sport match predictions](local/README.md)
 
 ### Azure Machine Learning Studio workshop
-[Azure - Training your model in Azure Machine Learning studio](/part-1/README.MD)  
+[Azure - Training your model in Azure Machine Learning studio](part-1/README.MD)  
 
 
 
