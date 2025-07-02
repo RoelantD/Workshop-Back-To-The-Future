@@ -30,5 +30,10 @@ Start the **4_function_calling.py** and ask it *Can you predict a winner?*
 
 It should request more data from you and execute the function to randomly pick the home or away team.
 
+## Update the predict_winner function to leverage your ML model
+Now it is time to add some logic to consume your ML model you created in [part 1](/part-1/README.md).
+
+Implement the API call and call the prediction endpoint to get a prediction from the model.
+
 [⏮️ Previous](/part-2/2-3-add-knowledge.md) 
 [⏭️ Next](/part-2/2-5-add-openapi.md)
