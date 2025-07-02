@@ -1,6 +1,0 @@
-Step step_BWEmUyRVeaFR7qrZGQZl7dRe status: failed
-  Tool calls:
-    Tool Call ID: call_fnD9PXdh3BhNnulSvZKqiL24
-    Type: openapi
-    Function name: betting_api_GetCurrentBettingOpportunity    Function output: 
-

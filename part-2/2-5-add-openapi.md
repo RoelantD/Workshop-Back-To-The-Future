@@ -3,6 +3,7 @@
 Now we're going to enhance our agent with the ability to call external APIs using OpenAPI specifications. This powerful feature allows our agent to interact with real-world services, making it more practical and capable of performing actual business operations.
 
 In this step, we'll add an OpenAPI tool that enables our agent to:
+- Update instructions.txt with your own random user GUID and name
 - Retrieve current betting opportunities
 - Place bets on football matches
 
@@ -186,11 +187,7 @@ This will create a more sophisticated agent that combines:
 
 ## Troubleshooting
 
-**Common issues:**
-- **File path errors**: Ensure swagger.json path is correct
-- **API connectivity**: Check if the betting API endpoint is accessible
-- **Authentication**: Verify OpenApiAnonymousAuthDetails() is appropriate
-- **JSON parsing**: Validate your swagger.json is properly formatted
+You can check the logs folder for the output of the agent so you can inspect the tool calls to the API.
 
 Your agent now has the full spectrum of capabilities - from knowledge retrieval to API integration to custom business logic!
 
