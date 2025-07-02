@@ -69,18 +69,8 @@ Before we dive into the future, let's quickly set you up:
   - Integrate with the provided C# .NET betting API
   - Track bets and manage leaderboard status  
 
-**5. Live Prediction Challenge (15 mins)**
-  - Connect to live sports data via the service bus  
-  - Bet based on your agent’s predictions
-  - Watch your performance on the leaderboard  
-
-## 🎖 Wrap-Up & Leaderboard Celebration (5 mins)
-- Check final standings  
+## 🎖 Wrap-Up (5 mins)
 - Open Q&A  
 - Explore next steps and resources for your AI journey  
 
-## 🎬 Additional Resources
-- Detailed Markdown guides
-- Step-by-step visuals
-- Tips, best practices, and troubleshooting advice
 
