@@ -5,6 +5,7 @@ from azure.ai.projects import AIProjectClient
 from azure.identity import DefaultAzureCredential
 from azure.ai.agents.models import ToolSet,FunctionTool, FileSearchTool, FilePurpose, MessageRole,OpenApiTool,OpenApiAnonymousAuthDetails
 from dotenv import load_dotenv
+from helpers import logwrite
 
 ############################
 # Create an AIProjectClient instance
@@ -18,37 +19,10 @@ project_client = AIProjectClient(
 )
 
 with project_client:
-
-    ############################
-    # File Search tool
-    ############################
-
-    # Upload all files in the documents directory
-    print(f"Start uploading files from {"./documents"}...")
-    file_ids = [
-        project_client.agents.files.upload_and_poll(file_path=os.path.join("./documents", f), purpose=FilePurpose.AGENTS).id
-        for f in os.listdir("./documents")
-        if os.path.isfile(os.path.join("./documents", f))
-    ]
-    print(f"Uploaded {len(file_ids)} files.")
-
-    # Create a vector store with the uploaded file
-    vector_store = project_client.agents.vector_stores.create_and_poll(data_sources=[], name="contoso-pizza-store-information")
-    print(f"Created vector store, vector store ID: {vector_store.id}")
-
-    # Create a vector store file batch to process the uploaded files
-    batch = project_client.agents.vector_store_file_batches.create_and_poll(
-        vector_store_id=vector_store.id,
-        file_ids=file_ids
-    )
-
-    # Create a file search tool
-    file_search = FileSearchTool(vector_store_ids=[vector_store.id])
-
     ############################
     # OpenApiTool
     ############################
-    with open(os.path.join(os.path.dirname(__file__), "/part-2/code/swagger.json"), "r") as f:
+    with open(os.path.join(os.path.dirname(__file__), "./swagger.json"), "r") as f:
             openapi_betting_api = jsonref.loads(f.read())
 
     openapi_tool = OpenApiTool(
@@ -79,7 +53,6 @@ with project_client:
     # Creating the toolset
     ############################
     toolset = ToolSet()
-    toolset.add(file_search)
     toolset.add(openapi_tool)
     toolset.add(functions)
     project_client.agents.enable_auto_function_calls(toolset)
@@ -126,6 +99,11 @@ with project_client:
         if first_message:
             # Print the 'value' from the first text message content
             print(next((item["text"]["value"] for item in first_message.content if item.get("type") == "text"), ""))
+
+        ###############
+        # Logging run steps and tool calls
+        ###############
+        logwrite.log_run_steps_and_tool_calls(project_client, thread, run)
 
         
     #############################

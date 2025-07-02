@@ -11,7 +11,7 @@
     }
   ],
   "paths": {
-    "/api/bet": {
+    "/bet": {
       "post": {
         "tags": [
           "Cloudland.Workshop.Sports.API"
@@ -34,7 +34,7 @@
         }
       }
     },
-    "/api/betting-opportunity": {
+    "/betting-opportunity": {
       "get": {
         "tags": [
           "Cloudland.Workshop.Sports.API"
@@ -75,7 +75,7 @@
           },
           "friendlyName": {
             "type": "string",
-            "description": "A user-friendly name for this bet.",
+            "description": "A user-friendly name for the user placing this bet.",
             "nullable": true
           }
         },
