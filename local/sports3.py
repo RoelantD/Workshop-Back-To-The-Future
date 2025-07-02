@@ -12,7 +12,7 @@ url = "http://localhost:11434/api/chat"
 
 
 # Read the CSV file and prepare a summary for the model
-csv_path = "england-premier-league-2019-to-2020.csv"
+csv_path = "local/england-premier-league-2019-to-2020.csv"
 if not os.path.exists(csv_path):
     raise FileNotFoundError(f"CSV file not found: {csv_path}")
 

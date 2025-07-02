@@ -4,7 +4,7 @@ This folder demonstrates how to install and run a local LLM using [Ollama](https
 
 ## Contents
 
-- `sports1.py`: Basic example showing how to integrate with the Ollama module.
+- `sports1.py`: Basic example showing how to integrate with the Ollama module. 
 - `sports2.py`: Example using a general-purpose model.
 - `sports3.py`: Demonstrates consuming a locally running Ollama model via an API, including usage of a custom model.
 
