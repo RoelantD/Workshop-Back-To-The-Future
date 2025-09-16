@@ -1,5 +1,5 @@
 ### Part 1 Quick links:  
-[1-3-azure-ml-studio.md](1-3-azure-ml-studio.md)  
+[1-3-introduction.md](1-3-introduction.md)  
 [1-4-regression-models.md](1-4-regression-models.md)  
 [1-5-binary-classification.md](1-5-binary-classification.md)  
 [1-6-multiclass-classification.md](1-6-multiclass-classification.md)  
