@@ -87,9 +87,9 @@ with open(os.path.join(os.path.dirname(__file__), "/part-2/code/swagger.json"), 
         openapi_betting_api = jsonref.loads(f.read())
 
 openapi_tool = OpenApiTool(
-    name="betting_api", 
+    name="prediction_api", 
     spec=openapi_betting_api, 
-    description="Place bets, retrieve betting options, and check bet status", 
+    description="Get football match predictions from the local inference API", 
     auth=OpenApiAnonymousAuthDetails()
 )
 ```
@@ -120,36 +120,17 @@ This gives our agent a comprehensive set of capabilities:
 2. **OpenAPI tool**: Call external betting APIs
 3. **Function tool**: Execute custom Python logic
 
+
 ## Testing Your Enhanced Agent
 
 Start the **5_full_file_search.py** script and try these interactions:
 
-### 1. Get Betting Opportunities
+### 1. Get a Match Prediction
 ```
-You: What betting opportunities are currently available?
-```
-
-The agent should call the `GetCurrentBettingOpportunity` endpoint and return the available matches.
-
-### 2. Place a Bet
-```
-You: I want to place a bet on the next match. I think the home team will win.
+You: Who will win between TeamA and TeamB, provided [insert weather and team conditions here]?
 ```
 
-The agent should:
-1. First get current betting opportunities
-2. Ask for additional details if needed (amount, user ID)
-3. Call the `PlaceBet` endpoint with the proper parameters
-
-### 3. Combined Intelligence
-```
-You: Based on the character knowledge and my prediction function, what would Biff Tannen bet on?
-```
-
-This tests the agent's ability to:
-1. Search the knowledge base about Biff Tannen
-2. Use the predict_winner function
-3. Potentially place a bet via the API
+The agent should call the `/predict` endpoint of your local machine learning API and return the predicted outcome and probabilities.
 
 ## Understanding the Agent's Decision Making
 

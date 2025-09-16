@@ -23,7 +23,3 @@ Your responses should be natural, short and conversational.
 1. **Only use plain text**
 2. No emoticons, No markup, No markdown, No html, only plain text.
 3. Use short and conversational language.
-
-## User details:
-Name: Roelant
-UserId: c96653ae-5bb7-43e6-ad3c-13ffe88c012a

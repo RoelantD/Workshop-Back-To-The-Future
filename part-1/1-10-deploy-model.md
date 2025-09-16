@@ -1,79 +1,88 @@
-# Deploy a machine learning model using ~~designer~~
+# Step-by-Step Workshop: Running and Deploying Your Model (`app.py`)
 
-If you have not created a pipeline yet, continue with [Training a machine learning model](/part-1/1-9-train-model.md)
+This guide will show you how to run your trained model locally using the provided FastAPI app, and give you a glimpse of what cloud deployment would look like.
 
-To deploy your pipeline, you must first convert the training pipeline into a real-time inference pipeline. This process removes training components and adds web service inputs and outputs to handle requests.
+---
 
-## Create a real-time inference pipeline
+## 1. Introduction
 
-1. Select **Jobs** from the sidebar menu, then open the pipeline job that you created. On the detail page, above the pipeline canvas, select the ellipses ... then choose **Create inference pipeline** > **Real-time inference pipeline**.
+After training your model, you can serve it as an API so others (or your own applications) can make predictions. We'll use FastAPI for this purpose.
 
-Your new pipeline now looks like this:
-![Inference pipeline](/images/inference-pipeline.jpeg)
+---
 
-When you selected **Create inference pipeline**, several things happened:
-- The trained model is stored as a **Dataset** component in the component palette. You can find it under **My Datasets**.  
-- Training components like **Train Model** and **Split Data** are removed.  
-- The saved trained model is added back into the pipeline.  
-- **Web Service Input** and **Web Service Output** components are added. These components show where user data enters the pipeline and where data is returned.  
+## 2. How the Script Works (`app.py`)
 
+- Loads the trained model (`home_result_model.joblib`) and schema (`schema.json`).
+- Starts a FastAPI web server with two endpoints:
+	- `GET /` returns a welcome message and the expected feature columns.
+	- `POST /predict` accepts a JSON payload with feature values and returns a prediction and probabilities.
+- Uses Pydantic for input validation and Pandas for data handling.
+
+**Key code parts:**
+```python
+pipe = joblib.load(MODEL_PATH)  # Loads the trained model
+schema = json.loads(SCHEMA_PATH.read_text()) if SCHEMA_PATH.exists() else None
+
+@app.post("/predict")
+def predict(payload: MatchFeatures):
+		row = {col: payload.features.get(col, None) for col in schema["feature_cols"]}
+		X = pd.DataFrame([row])
+		pred = pipe.predict(X)[0]
+		proba = pipe.predict_proba(X)[0].tolist()
+		return {"prediction": str(pred), "classes": list(pipe.classes_), "probabilities": proba}
 ```
-⚠️Note
 
-By default, the Web Service Input expects the same data schema as the component output data that connects to the same downstream port. In this sample, Web Service Input and Automobile price data (Raw) connect to the same downstream component, so Web Service Input expects the same data schema as Automobile price data (Raw) and target variable column price is included in the schema. However, when you score the data, you won't know the target variable values. In that case, you can remove the target variable column in the inference pipeline using the Select Columns in Dataset component. Make sure that the output of Select Columns in Dataset removing target variable column is connected to the same port as the output of the Web Service Input component.
-```
+---
 
-2. Select **Configure & Submit**, and use the same compute target and experiment that you used in part one.
-If this is the first job, it might take up to 20 minutes for your pipeline to finish running. The default compute settings have a minimum node size of 0, which means that the designer must allocate resources after being idle. Repeated pipeline jobs take less time since the compute resources are already allocated. Additionally, the designer uses cached results for each component to further improve efficiency.
+## 3. Running the API Locally
 
-3. Go to the real-time inference pipeline job detail by selecting **Job detail** in the left pane.
+1. Make sure you have trained your model and have `model/home_result_model.joblib` and `model/schema.json`.
+2. Install requirements:
+	 ```bash
+	 pip install -r part-1/code/requirements.txt
+	 ```
+3. Start the API server:
+	 ```bash
+	 python part-1/code/app.py
+	 ```
+4. Open your browser and go to [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) to try out the interactive API documentation (Swagger UI).
+5. Use the `/predict` endpoint to send a JSON object with your feature values and get a prediction.
 
-4. Select **Deploy** in the job detail page.
+---
 
-## Deploy the real-time endpoint
+## 4. Example Prediction Request
 
-Azure Machine Learning Studio has an option to deploy a real-time inference endpoint through the UI. That would be amazing if it actually (still) worked. There seems to be a very resilient bug introduced with the recent changes to Azure AI Foundry authentication.
-
-We are therefore going to deploy our inference endpoint by downloading our trained model and using a Python script.
-
-### Downloading our model files
-
-1. Select **Data** in the **Assets** menu on the left side.
-
-2. Select the asset that starts with **MD-**. This will take you to the asset metadata overview.
-
-3. Use the **Storage URI** to navigate to the correct folder in the storage account. This is the storage account that was created alongside the Azure Machine Learning Studio instance. 
-
-4. Download the entire contents of the **Trained_model** folder to the **model** folder in this repository.
-
-5. Note that we are not using **score.py**, but we are using an updated version **score_new.py** when deploying the model.
-
-6. Update **config.json** with the values of your **Azure Machine Learning Workspace**. You can find all three of these values in the Azure Portal on the **Overview** node of the Workspace resource.
-
-7. Open a terminal at the **root** folder of this repository (so make sure you are **NOT** in the model folder.)
-
-8. Run the **deploy.py** script to deploy the endpoint. ⚠️ This will take a couple of minutes.
-
-The deploy script will provide you with the necessary values to use the created endpoint. The endpoint will listen to **POST** requests on the **Scoring URI** and will check for the key in the **Bearer token**.
-
-Set the **Authorization header** to *Bearer [KEY]* and use the following test body:
-
-```
+Send a POST request to `/predict` with a JSON body like:
+```json
 {
-  "data": [
-    {
-      "HomeFPI": 125.5,
-      "AwayFPI": 85.2,
-      "HomeOdds": 2.1,
-      "AwayOdds": 2.2,
-      "NumberSpectators": 50000,
-      "Weather": "Clear"
-    }
-  ]
+	"features": {
+		"HomeTeam": "TeamA",
+		"AwayTeam": "TeamB",
+		"Weather": "Rainy",
+		"DayOfWeek": "Saturday",
+		"Referee": "Smith"
+		// ...other features as required by your model
+	}
 }
 ```
 
-🥳 You have now succesfully created an endpoint for your newly trained machine learning classification model.
+You can use the Swagger UI or a tool like Postman/curl to test this.
+
+---
+
+## 5. What About Cloud Deployment?
+
+Deploying to the cloud (e.g., Azure, AWS, GCP) usually involves:
+- Packaging your app (often with Docker)
+- Pushing it to a cloud service (like Azure App Service, AWS Elastic Beanstalk, or Google Cloud Run)
+- Setting environment variables and storage for your model files
+- Exposing the API endpoint to the internet
+
+The code in `app.py` is already structured for easy deployment—just point your cloud service to run `python app.py` and make sure your model files are available.
+
+---
+
+Find the full code in [`app.py`](./code/app.py).
 
 [⏮️ Previous](/part-1/1-9-train-model.md) 
 [⏭️ Next](/part-2/2-1-create-vanilla-agent.md)

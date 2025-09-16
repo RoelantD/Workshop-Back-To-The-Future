@@ -26,9 +26,9 @@ with project_client:
             openapi_betting_api = jsonref.loads(f.read())
 
     openapi_tool = OpenApiTool(
-        name="betting_api", 
+        name="prediction_api", 
         spec=openapi_betting_api, 
-        description="Place bets, retrieve betting options, and check bet status", 
+        description="Get football match predictions from the local inference API", 
         auth=OpenApiAnonymousAuthDetails()
     )
 
@@ -37,13 +37,28 @@ with project_client:
     ############################
     def predict_winner(home: str, away: str) -> str:
         """
-        Predicts the winner of a match between two teams.
+        Predicts the winner of a match between two teams by calling the local API.
 
         :param home: The home team.
         :param away: The away team.
         :return: The predicted winner.
         """
-        return random.choice([home, away])
+        # Prepare payload for the /predict endpoint
+        payload = {
+            "features": {
+                "home": home,
+                "away": away
+            }
+        }
+        # Call the /predict endpoint using the OpenApiTool
+        response = openapi_tool.call(
+            operation_id="predict_predict_post",
+            request_body=payload
+        )
+        # Parse and return the prediction from the response
+        # (Assume the API returns a JSON with the prediction in a key, e.g., 'prediction')
+        prediction = response.get("prediction")
+        return prediction if prediction else "No prediction returned"
     
     
     functions = FunctionTool(functions={predict_winner})
