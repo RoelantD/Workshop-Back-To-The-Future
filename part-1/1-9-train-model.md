@@ -1,256 +1,275 @@
-# Train a machine learning model using designer
+# Step-by-Step Workshop: Building the Model Training Script (`train.py`)
 
-This section explains how to use the Azure Machine Learning designer to train a multi-class classification model that predicts results of football matches. 
+This workshop will guide you through constructing a machine learning training script step by step. By the end, you'll have a complete [`train.py`](./code/train.py) that loads data, preprocesses it, trains a model, evaluates it, and saves the results.
 
-To learn more about the designer, check out the [Microsoft docs](https://learn.microsoft.com/en-us/azure/machine-learning/concept-designer).
+---
 
-    ⚠️ Please note we are using the classic prebuilt components in this workshop. These will be
-    TODO
+## 1. Introduction & Requirements
 
-## Create a new pipeline
-Azure Machine Learning pipelines organize multiple machine learning and data processing steps into a single resource. Pipelines let you organize, manage, and reuse complex machine learning workflows across projects and users.
+We'll use Python and several popular libraries, all specified in the provided `requirements.txt` file.
 
-To create an Azure Machine Learning pipeline, you need an Azure Machine Learning workspace. In this section, you learn how to create both these resources.
-
-### Verify you have workspace
-You need an Azure Machine Learning workspace to use the designer. The workspace is the top-level resource for Azure Machine Learning. It provides a centralized place to work with all the artifacts you create in Azure Machine Learning. If you have not created a workspace [do so now](/part-1/1-create-ml-workspace.md).
-
-### Create the pipeline
-
-1. Sign in to the Azure Machine Learning studio, and select the workspace you want to use.
-
-1. Select **Designer** from the sidebar menu. Under **Classic prebuilt**, choose **Create a new pipeline using classic prebuilt components**.
-
-1. Select the pencil icon next to the automatically generated pipeline draft name, rename it to **Football result prediction**. The name doesn't need to be unique.
-
-### Import data
-
-There are several sample datasets included in the designer for you to experiment with. For this section use **football-result.csv**
-
-TODO import dataset
-
-1. To the left of the pipeline canvas is a palette of datasets, models and components. Select **Data**.
-
-2. Select the dataset **football-results**, and drag it onto the canvas.
-
-
-### Visualize the data
-You can visualize the data to understand the dataset that you'll use.
-
-1. Right-click the football-results and select **Preview Data**.  
-
-1. Select the different columns in the data window to view information about each one.  
-
-1. Each row represents a result of a football match, and the variables associated with each match appear as columns. There are 13872 rows, 1 header and 15 columns in this dataset.
-
-
-### Prepare data
-Datasets typically require some preprocessing before analysis. You might have noticed some missing values when you inspected the dataset. These missing values must be cleaned so that the model can analyze the data correctly.
-
-TODO empty values
-
-### Remove a column
-When you train a model, you must do something about the data that's missing. In this dataset, the **NumberSpectators** column is missing many values, so you exclude that column from the model altogether.
-
-1. In the datasets and component palette to the left of the canvas, select **Component** and search for the **Select Columns in Dataset** component.
-
-1. Drag the **Select Columns in Dataset** component onto the canvas. Drop the component below the dataset component.
-
-1. Connect the **football-results** dataset to the **Select Columns in Dataset** component. Drag from the dataset's output port, which is the small circle at the bottom of the dataset on the canvas, to the input port of **Select Columns in Dataset**, which is the small circle at the top of the component.
-
-    💡Tip
-    You create a flow of data through your pipeline when you connect the output port of one component to an input port of another.
-
-![Connect components](/images/connect-components.jpeg)
-
-4. Select the **Select Columns in Dataset** component.
-
-5. Select the arrow icon under **Pipeline interface** to the right of the canvas to open the component details pane. Alternatively, you can double-click the **Select Columns in Dataset** component to open the details pane.
-
-6. Select **Edit column** to the right of the pane.
-
-7. Expand the **Column names** drop down next to **Include**, and select **All columns**.
-
-8. Select the + to add a new rule.
-
-9. From the drop-down menus, select **Exclude** and **Column names**.
-
-10. Enter *NumberSpectators* in the text box.
-
-11. In the lower right, select **Save** to close the column selector.
-
-![Select columns](/images/select-columns.jpeg)
-
-12. In the **Select Columns in Dataset** component details pane, expand **Node information**.
-
-13. Select the **Comment** text box and enter *Exclude number of spectators*.  
-Comments appear on the graph to help you organize your pipeline.
-
-### Clean missing data
-
-Your dataset still has missing values after you remove the NumberSpectators column. You can remove the remaining missing data by using the **Clean Missing Data** component.
-
-    💡Tip
-    Cleaning the missing values from input data is a prerequisite for using most of the components in the designer.
-
-1. In the datasets and component palette to the left of the canvas, select **Component** and search for the **Clean Missing Data** component.
-
-2. Drag the **Clean Missing Data** component to the pipeline canvas. Connect it to the **Select Columns in Dataset** component.
-
-3. Select the **Clean Missing Data** component.
-
-4. Select the arrow icon under **Pipeline interface** to the right of the canvas to open the component details pane. Alternatively, you can double-click the **Clean Missing Data** component to open the details pane.
-
-5. Select **Edit column** to the right of the pane.
-
-6. In the **Columns to be cleaned** window that appears, expand the drop-down menu next to **Include**. Select **All columns**.
-
-7. Select **Save**.
-
-8. In the **Clean Missing Data** component details pane, under **Cleaning mode**, select **Remove entire row**.
-
-9. In the **Clean Missing Data** component details pane, expand **Node information**.
-
-10. Select the **Comment** text box and enter *Remove missing value rows*.  
-Your pipeline should now look something like this:
-
-![Cleaned rows pipeline state](/images/pipeline-state.jpeg)
-
-## Train a machine learning model
-Now that you have the components in place to process the data, you can set up the training components.
-
-Because you want to assign a class to your data, you can use a classification algorithm. For this example, you use a logistic regression model.
-
-### Split the data
-
-Splitting data is a common task in machine learning. You'll split your data into two separate datasets. One dataset trains the model and the other tests how well the model performed.
-
-1. In the datasets and component palette to the left of the canvas, select **Component** and search for the **Split Data** component.
-
-2. Drag the **Split Data** component to the pipeline canvas.
-
-3. Connect the left port of the **Clean Missing Data** component to the **Split Data** component.
-
-4. Select the **Split Data** component.
-
-5. Select the arrow icon under **Pipeline interface** to the right of the canvas to open the component details pane. Alternatively, you can double-click the **Split Data** component to open the details pane.
-
-6. In the **Split Data** details pane, set the **Fraction of rows in the first output dataset** to *0.7*.
-
-This option splits 70 percent of the data to train the model and 30 percent for testing it. The 70 percent dataset is accessible through the left output port. The remaining data is available through the right output port.
-
-7. In the **Split Data** details pane, expand **Node information**.
-
-8. Select the **Comment** text box and enter *Split the dataset into training set (0.7) and test set (0.3)*.
-
-### Train the model
-
-Train the model by giving it a dataset that includes the price. The algorithm constructs a model that explains the relationship between the features and the price as presented by the training data.
-
-1. In the datasets and component palette to the left of the canvas, select **Component** and search for the **Multiclass Logistic Regression** component.
-
-2. Drag the **Multiclass Logistic Regression** component to the pipeline canvas.
-
-3. In the datasets and component palette to the left of the canvas, select **Component** and search for the **Train Model** component.
-
-4. Drag the **Train Model** component to the pipeline canvas.
-
-5. Connect the output of the **Multiclass Logistic Regression** component to the left input of the **Train Model** component.
-
-6. Connect the training data output (left port) of the **Split Data** component to the right input of the **Train Model** component.
-
-![Train model overview](/images/train-model.jpeg)
-
-7. Select the **Train Model** component.
-
-8. Select the arrow icon under **Pipeline settings** to the right of the canvas to open the component details pane. Alternatively, you can double-click the **Train Model** component to open the details pane.
-
-9. elect **Edit column** to the right of the pane.
-
-10. In the **Label column** window that appears, expand the drop-down menu and select **Column names**.
-
-11. In the text box, enter *HomeResult* to specify the value that your model is going to predict.  
-
-```
-⚠️ Important
-
-Make sure you enter the column name exactly. Don't capitalize price.
+**Install requirements:**
+```bash
+pip install -r part-1/code/requirements.txt
 ```
 
-Your pipeline should look like this:
-![Complete pipeline overview](/images/complete-pipeline.jpeg)
+---
 
-### Add the Score Model component
+## 2. Loading the Data
 
-After you train your model by using 70 percent of the data, you can use it to score the other 30 percent to see how well your model functions.
+First, let's load the dataset using pandas.
 
-1. In the datasets and component palette to the left of the canvas, select **Component** and search for the **Score Model** component.
+```python
+import pandas as pd
 
-2. Drag the **Score Model** component to the pipeline canvas.
+df = pd.read_csv('datasets/football-results.csv')
+print(df.head())
+```
 
-3. Connect the output of the **Train Model** component to the left input port of **Score Model**. Connect the test data output (right port) of the **Split Data** component to the right input port of **Score Model**.
+**Explanation:**
+- We import pandas and read the CSV file into a DataFrame.
+- `print(df.head())` shows the first few rows to verify loading.
 
-### Add the Evaluate Model component
-Use the **Evaluate Model** component to evaluate how well your model scored the test dataset.
+---
 
-1. In the datasets and component palette to the left of the canvas, select **Component** and search for the **Evaluate Model** component.
+## 3. Selecting Features and Target
 
-2. Drag the **Evaluate Model** component to the pipeline canvas.
+Identify which columns to use as features and which as the target variable.
 
-3. Connect the output of the **Score Model** component to the left input of **Evaluate Model**.
 
-The final pipeline should look something like this:
-![Complete pipeline overview incl eval](/images/complete-pipeline-with-eval.jpeg)
+```python
+TARGET = "HomeResult"
+exclude_cols = [TARGET]  # You may want to add more columns here!
+feature_cols = [c for c in df.columns if c not in exclude_cols]
+X = df[feature_cols]
+y = df[TARGET].astype(str)
+```
 
-### Submit pipeline
 
-1. Select **Configure & Submit** in the top corner to submit the pipeline.
+**Explanation:**
+- We set the target column and, by default, only exclude the target itself from the features.
+- `feature_cols` contains the names of the input features.
+- `X` is the feature matrix, `y` is the target vector.
 
-2. After the step-by-step wizard appears, follow the wizard to submit the pipeline job. 
+---
 
-3. Select **Create new** under **Experiment name**
+### 📝 Exercise: Feature Selection and Data Leakage
 
-4. Configure the experiment, job display name, job description, etc. Click **Next** button.
+Take a look at the columns in your dataset. Which columns do you think should be included as features, and which should be excluded? Write down your thoughts and try different options in your code.
 
-5. In **Inputs & Outputs**, you can assign value to the inputs and outputs that are promoted to pipeline level. It's empty in this example because we didn't promote any input or output to pipeline level. Click **Next** button.  
+- What makes a column a good feature for predicting the target?
+- Are there columns that would "leak" the answer (i.e., give away the target directly)?
+- What would happen if you included columns like `Winner`, `HomeScore`, or `AwayScore` when predicting `HomeResult`?
 
-6. In **Runtime settings**, you can configure the default datastore and default compute to the pipeline. It's the default datastore and compute for all components in the pipeline. However, if you set a different compute or datastore for a component explicitly, the system respects the component-level setting. Otherwise, it uses the default. Under **Select compute type**, select **Compute instance**.
+**Suggestion:**
+- Try adding columns such as `Winner`, `HomeScore`, or `AwayScore` to the `exclude_cols` list above and see how it affects your model's performance.
 
-7. You can only select running compute instances. If the **Compute instance** has stopped, go to **Manage** > **Compute** in the left menu and start the compute in a new tab (CTRL-click the link). You can then refresh the compute instances by clicking **Refresh compute**.
-Select the running compute instance. Click **Next** button.
+**Note:**
+- Including columns like `Winner` or the actual scores would make the model's job trivial, as these columns are directly related to the target and would result in data leakage. This would lead to unrealistically high accuracy during training, but the model would not generalize to new, real-world data where these values are not known in advance.
 
-8. The **Review + Submit** step is the last step to review all settings before submit. The wizard remembers your last configuration if you ever submit the pipeline. Click **Submit**
+---
 
-After submitting the pipeline job, there is a message on the top with a link to the job detail. You can select this link to review the job details.
+### 📝 Exercise: Feature Selection and Data Leakage
 
-![Submitted pipeline](/images/pipeline-submitted.jpeg)
+Take a look at the columns in your dataset. Which columns do you think should be included as features, and which should be excluded? Discuss with your group or write down your thoughts.
 
-### View scored labels
+- What makes a column a good feature for predicting the target?
+- Are there columns that would "leak" the answer (i.e., give away the target directly)?
+- What would happen if you included columns like `Winner`, `HomeScore`, or `AwayScore` when predicting `HomeResult`?
 
-In the job detail page, you can check the pipeline job status, results, and logs.
+**Discussion:**
+- Including columns like `Winner` or the actual scores would make the model's job trivial, as these columns are directly related to the target and would result in data leakage. This would lead to unrealistically high accuracy during training, but the model would not generalize to new, real-world data where these values are not known in advance.
 
-After the job completes, you can view the results of the pipeline job. First, look at the predictions generated by the regression model.
+**Experiment:**
+- Try changing the `exclude_cols` list and see how it affects your model's performance. What happens if you include or exclude different columns?
 
-1. Right-click the **Score Model** component, and select **Preview data** > **Scored dataset** to view its output.
+---
 
-Here you can see the predicted prices and the actual prices from the testing data.
+## 4. Splitting the Data
 
-![Scored dataset](/images/scored-dataset.jpeg)
+Split the data into training and test sets.
 
-### Evaluate models
+```python
+from sklearn.model_selection import train_test_split
 
-Use the **Evaluate Model** to see how well the trained model performed on the test dataset.
+X_train, X_test, y_train, y_test = train_test_split(
+	X, y, test_size=0.2, random_state=42, stratify=y
+)
+```
 
-Right-click the **Evaluate Model** component and select **Preview data** > **Evaluation results** to view its output.
-The following statistics are shown for your model:
+**Explanation:**
+- We use `train_test_split` to create training and test sets.
+- `test_size=0.2` means 20% of the data is used for testing, 80% for training.
+- `random_state=42` ensures reproducibility (you get the same split every time).
+- `stratify=y` keeps the class distribution the same in both sets (important for classification problems).
 
-- **Mean Absolute Error (MAE)**: The average of absolute errors. An error is the difference between the predicted value and the actual value.  
-- **Root Mean Squared Error (RMSE)**: The square root of the average of squared errors of predictions made on the test dataset.  
-- **Relative Absolute Error**: The average of absolute errors relative to the absolute difference between actual values and the average of all actual values.  
-- **Relative Squared Error**: The average of squared errors relative to the squared difference between the actual values and the average of all actual values.  
-- **Coefficient of Determination**: Also known as the R squared value, this statistical metric indicates how well a model fits the data.  
+---
 
-For each of the error statistics, smaller is better. A smaller value indicates that the predictions are closer to the actual values. For the coefficient of determination, the closer its value is to one (1.0), the better the predictions.
+## 5. Preprocessing Pipelines
+
+
+Before we dive in: Building these pipelines might look complex at first glance, but it's not as hard as it seems! With a few lines of code, you can handle a lot of data preparation automatically. And hey—it’s not called Data Science without good reason. 😄
+
+---
+
+### Why do we need to process data?
+
+Raw data is rarely perfect for machine learning. It may contain missing values, inconsistent formats, or features on very different scales. Processing ("preprocessing") the data helps:
+- Fill in or handle missing values
+- Convert categories to numbers
+- Make sure all features are on a similar scale
+- Remove irrelevant or problematic columns
+
+This makes the data easier for the model to learn from and improves results.
+
+---
+
+### Removing columns with too many missing values
+
+Sometimes a column has so many missing values that it's better to remove it entirely. In our dataset, `NumberOfSpectators` often contains null values. Let's remove it before building the pipeline:
+
+```python
+if 'NumberOfSpectators' in df.columns:
+	df = df.drop(columns=['NumberOfSpectators'])
+```
+
+---
+
+**What do 'impute' and 'scale' mean?**
+- **Impute:** This means filling in missing values in your data. For example, if a column has some empty cells, the imputer can fill them with the median (for numbers) or the most common value (for categories).
+- **Scale:** This means adjusting numeric values so they're on a similar scale. For example, if one feature is in the range 0-1 and another is 0-1000, scaling helps the model treat them fairly.
+
+Handle missing values, scale numeric features, and encode categorical features using pipelines.
+
+```python
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.compose import ColumnTransformer
+
+categorical_cols = [c for c in feature_cols if df[c].dtype == 'object' or str(df[c].dtype).startswith('bool')]
+numeric_cols = [c for c in feature_cols if c not in categorical_cols]
+
+numeric_pipe = Pipeline([
+	("impute", SimpleImputer(strategy="median")),
+	("scale", StandardScaler(with_mean=False)),
+])
+categorical_pipe = Pipeline([
+	("impute", SimpleImputer(strategy="most_frequent")),
+	("onehot", OneHotEncoder(handle_unknown="ignore")),
+])
+
+preprocess = ColumnTransformer([
+	("num", numeric_pipe, numeric_cols),
+	("cat", categorical_pipe, categorical_cols),
+])
+```
+
+**Explanation:**
+- Numeric features are imputed and scaled.
+- Categorical features are imputed and one-hot encoded.
+- `ColumnTransformer` applies the correct pipeline to each column type.
+
+---
+
+## 6. Building the Model Pipeline
+
+Combine preprocessing and model training into a single pipeline.
+
+```python
+from sklearn.linear_model import LogisticRegression
+
+model = Pipeline([
+	("preprocess", preprocess),
+	("clf", LogisticRegression(max_iter=500)),
+])
+```
+
+**Explanation:**
+- The pipeline first preprocesses the data, then fits a logistic regression classifier.
+
+---
+
+## 7. Training the Model
+
+Fit the model to the training data.
+
+```python
+model.fit(X_train, y_train)
+```
+
+**Explanation:**
+- The pipeline handles all preprocessing and model fitting in one step.
+
+---
+
+## 8. Evaluating the Model
+
+Check the model's performance on the test set.
+
+```python
+from sklearn.metrics import classification_report, accuracy_score
+
+y_pred = model.predict(X_test)
+print(f"Accuracy: {accuracy_score(y_test, y_pred):.3f}")
+print(classification_report(y_test, y_pred))
+```
+
+
+**Explanation:**
+- We print the accuracy and a detailed classification report.
+
+---
+
+### Interpreting Model Evaluation Results
+
+After training, you'll see metrics like accuracy, precision, recall, and F1-score. Here's what they mean:
+
+- **Accuracy:** The percentage of correct predictions. Higher is generally better, but can be misleading if classes are imbalanced.
+- **Precision:** Of all the times the model predicted a class, how often was it correct? High precision means few false positives.
+- **Recall:** Of all the actual cases of a class, how many did the model find? High recall means few false negatives.
+- **F1-score:** The harmonic mean of precision and recall. A good balance between the two.
+
+**What is good?**
+- For a balanced dataset, look for high values (close to 1.0) for all metrics, especially for the classes you care about most.
+- If one class is much more important, focus on its precision/recall/F1.
+- If accuracy is very high but precision/recall are low for some classes, your model may be missing important cases.
+
+**Tip:**
+- Always compare your results to a simple baseline (like always guessing the most common class). If your model is only a little better, try improving your features or model.
+
+---
+
+## 9. Saving the Model and Schema
+
+Save the trained model and schema for later use.
+
+```python
+import joblib, json
+from pathlib import Path
+
+Path("model").mkdir(parents=True, exist_ok=True)
+joblib.dump(model, Path("model") / "home_result_model.joblib")
+schema = {
+	"feature_cols": feature_cols,
+	"categorical_cols": categorical_cols,
+	"numeric_cols": numeric_cols,
+	"target": TARGET,
+	"classes_": sorted(y.unique().tolist()),
+}
+(Path("model") / "schema.json").write_text(json.dumps(schema, indent=2))
+```
+
+**Explanation:**
+- The model is saved with joblib.
+- The schema (feature info) is saved as JSON.
+
+---
+
+
+You now have a robust, reusable training script for your machine learning workflow!
+
+Find a complete and working example in the code folder: [`train.py`](./code/train.py).
 
 [⏮️ Previous](/part-1/1-8-transformers.md) 
 [⏭️ Next](/part-1/1-10-deploy-model.md)

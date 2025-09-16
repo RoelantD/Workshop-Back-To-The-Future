@@ -1,0 +1,38 @@
+{
+  "feature_cols": [
+    "Year",
+    "Date",
+    "Time",
+    "City",
+    "NumberSpectators",
+    "Weather",
+    "HomeTeam",
+    "AwayTeam",
+    "HomeFPI",
+    "AwayFPI",
+    "HomeOdds",
+    "AwayOdds"
+  ],
+  "categorical_cols": [
+    "Date",
+    "Time",
+    "City",
+    "Weather",
+    "HomeTeam",
+    "AwayTeam"
+  ],
+  "numeric_cols": [
+    "Year",
+    "NumberSpectators",
+    "HomeFPI",
+    "AwayFPI",
+    "HomeOdds",
+    "AwayOdds"
+  ],
+  "target": "HomeResult",
+  "classes_": [
+    "-1",
+    "0",
+    "1"
+  ]
+}
