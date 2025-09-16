@@ -131,5 +131,5 @@ The metrics described above are commonly used to evaluate a regression model. In
 
 After multiple iterations, the model that results in the best evaluation metric that's acceptable for the specific scenario is selected.
 
-[⏮️ Previous](/part-1/1-3-azure-ml-studio.md) 
+[⏮️ Previous](/part-1/1-3-introduction.md) 
 [⏭️ Next](/part-1/1-5-binary-classification.md) 
