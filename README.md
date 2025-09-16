@@ -5,8 +5,8 @@
 ### Local model workshop with Ollama
 [Local - Running LLM locally for making sport match predictions](https://github.com/RoelantD/Workshop-Back-To-The-Future/blob/main/local/readme.md)
 
-### Azure Machine Learning Studio workshop
-[Azure - Training your model in Azure Machine Learning studio](https://github.com/RoelantD/Workshop-Back-To-The-Future/blob/main/part-1/README.MD)  
+### Train you own machine-learning (NOT AN LLM) model
+[Local - Training your model using Python](https://github.com/RoelantD/Workshop-Back-To-The-Future/blob/main/part-1/README.MD)  
 
 
 
