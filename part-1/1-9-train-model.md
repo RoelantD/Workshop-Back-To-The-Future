@@ -17,6 +17,10 @@ pip install -r part-1/code/requirements.txt
 
 ## 2. Loading the Data
 
+
+👉 **Build Along:**
+Open a new file called `train.py` in your `code` folder. In this step, add the code to load the dataset using pandas. Run your script to check that the data loads and prints the first few rows.
+
 First, let's load the dataset using pandas.
 
 ```python
@@ -33,6 +37,10 @@ print(df.head())
 ---
 
 ## 3. Selecting Features and Target
+
+
+👉 **Build Along:**
+Now, in your `train.py`, add code to select the target column and define your feature columns. Print out the list of features and the shape of your data to check your work.
 
 Identify which columns to use as features and which as the target variable.
 
@@ -54,6 +62,10 @@ y = df[TARGET].astype(str)
 ---
 
 ### 📝 Exercise: Feature Selection and Data Leakage
+
+
+👉 **Build Along:**
+Experiment with the `exclude_cols` list in your script. Try including or excluding different columns and see how it affects your features. Discuss or note your findings.
 
 Take a look at the columns in your dataset. Which columns do you think should be included as features, and which should be excluded? Write down your thoughts and try different options in your code.
 
@@ -87,6 +99,10 @@ Take a look at the columns in your dataset. Which columns do you think should be
 
 ## 4. Splitting the Data
 
+
+👉 **Build Along:**
+Add the code to split your data into training and test sets. Print the shapes of your splits to confirm the operation worked as expected.
+
 Split the data into training and test sets.
 
 ```python
@@ -107,6 +123,8 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 ## 5. Preprocessing Pipelines
 
+👉 **Build Along:**
+Add the code for preprocessing pipelines to your script. Start by identifying your categorical and numeric columns, then build the pipelines and the `ColumnTransformer`. Print out the pipeline objects to check your setup.
 
 Before we dive in: Building these pipelines might look complex at first glance, but it's not as hard as it seems! With a few lines of code, you can handle a lot of data preparation automatically. And hey—it’s not called Data Science without good reason. 😄
 
@@ -125,6 +143,10 @@ This makes the data easier for the model to learn from and improves results.
 ---
 
 ### Removing columns with too many missing values
+
+
+👉 **Build Along:**
+If your dataset has columns with many missing values (like `NumberOfSpectators`), add code to drop them before building your pipelines.
 
 Sometimes a column has so many missing values that it's better to remove it entirely. In our dataset, `NumberOfSpectators` often contains null values. Let's remove it before building the pipeline:
 
@@ -174,6 +196,10 @@ preprocess = ColumnTransformer([
 
 ## 6. Building the Model Pipeline
 
+
+👉 **Build Along:**
+Add the code to create your model pipeline by combining the preprocessing and the classifier. Print the pipeline to verify.
+
 Combine preprocessing and model training into a single pipeline.
 
 ```python
@@ -192,6 +218,10 @@ model = Pipeline([
 
 ## 7. Training the Model
 
+
+👉 **Build Along:**
+Now, fit your model pipeline to the training data. Print a message when training starts and ends so you know this step is running.
+
 Fit the model to the training data.
 
 ```python
@@ -204,6 +234,10 @@ model.fit(X_train, y_train)
 ---
 
 ## 8. Evaluating the Model
+
+
+👉 **Build Along:**
+Add code to evaluate your model on the test set. Print the accuracy and classification report. Try changing your features and see how the results change.
 
 Check the model's performance on the test set.
 
@@ -242,6 +276,10 @@ After training, you'll see metrics like accuracy, precision, recall, and F1-scor
 
 ## 9. Saving the Model and Schema
 
+
+👉 **Build Along:**
+Finally, add code to save your trained model and the schema to disk. Check that the files are created in your output directory.
+
 Save the trained model and schema for later use.
 
 ```python
@@ -269,7 +307,17 @@ schema = {
 
 You now have a robust, reusable training script for your machine learning workflow!
 
-Find a complete and working example in the code folder: [`train.py`](./code/train.py).
+---
+
+When you finish each step, run your script to check your progress. If you get stuck, look at the complete example in the code folder: [`train.py`](./code/train.py).
+
+---
+
+## 🚀 What's Next?
+
+Now that you've built and saved your own machine learning model, it's time to make it useful! In the next section, you'll learn how to deploy your model by adding an API and connecting it to an AI agent. This will allow you (and others) to interact with your model programmatically and unlock its full potential.
+
+Get ready to bring your model to life!
 
 [⏮️ Previous](/part-1/1-8-transformers.md) 
 [⏭️ Next](/part-1/1-10-deploy-model.md)
