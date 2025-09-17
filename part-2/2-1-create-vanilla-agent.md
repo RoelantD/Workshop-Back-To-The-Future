@@ -22,7 +22,7 @@ We need to deploy an **Azure AI Foundry** resource in our resource group and dep
 
 9. Click **Create**
 
-## Deploy GPT4-o base model
+## Deploy GPT-4o base model
 
 1. Navigate to the created **Azure AI Foundry** resource
 
@@ -36,7 +36,7 @@ We need to deploy an **Azure AI Foundry** resource in our resource group and dep
 
 6. Make sure the filter is set to **Chat completion**
 
-7. Select the **gpt4-o** model and click **Confirm**
+7. Select the **gpt-4o** model and click **Deploy**
 
 ## Complete the .env file parameters
 If there is only a .env.sample file, rename that file to .env. These are the environment variables our scripts use.
