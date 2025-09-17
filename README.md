@@ -11,7 +11,8 @@
 [Local - Training your model using Python](https://github.com/RoelantD/Workshop-Back-To-The-Future/blob/main/part-1/README.MD)  
 
 
-<p align="center">
-	<img src="qr-code.png" alt="QR Code" width="200" />
-</p>
+
+<div style="float: right; margin-left: 24px; margin-bottom: 8px;">
+  <img src="qr-code.png" alt="QR Code" width="160" />
+</div>
 
