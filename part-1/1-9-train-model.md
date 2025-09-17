@@ -222,6 +222,9 @@ model = Pipeline([
 👉 **Build Along:**
 Now, fit your model pipeline to the training data. Print a message when training starts and ends so you know this step is running.
 
+
+To train ("fit") the model, we provide it with examples of input data (`X_train`) and the correct answers (`y_train`). The model uses these to learn patterns and relationships, so it can make accurate predictions on new, unseen data. `X_train` contains the features for each training example, while `y_train` contains the corresponding labels or targets.
+
 Fit the model to the training data.
 
 ```python
