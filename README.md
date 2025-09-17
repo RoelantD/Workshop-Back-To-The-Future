@@ -1,3 +1,5 @@
+
+
 # 📚 Welcome to the Back to the Future AI Workshop: Your Guide to Predictive Sports Agents!
 
 ## Quick links
@@ -9,5 +11,7 @@
 [Local - Training your model using Python](https://github.com/RoelantD/Workshop-Back-To-The-Future/blob/main/part-1/README.MD)  
 
 
-
+<p align="center">
+	<img src="qr-code.png" alt="QR Code" width="200" />
+</p>
 
