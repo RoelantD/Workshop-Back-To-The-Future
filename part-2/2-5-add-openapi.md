@@ -94,6 +94,7 @@ openapi_tool = OpenApiTool(
 )
 ```
 
+
 **Key components:**
 - **name**: A unique identifier for this API tool
 - **spec**: The parsed OpenAPI specification 
@@ -131,6 +132,37 @@ You: Who will win between TeamA and TeamB, provided [insert weather and team con
 ```
 
 The agent should call the `/predict` endpoint of your local machine learning API and return the predicted outcome and probabilities.
+
+## Exposing Your Local API with Visual Studio Code Development Tunnels
+
+To allow Azure AI Foundry (or any external service) to access your local API, you can use Visual Studio Code's built-in Development Tunnels. This will create a secure, public URL that tunnels traffic to your local machine.
+
+### Steps to Create a Tunnel
+
+1. **Start your local API server**
+  - Run your API as usual (e.g., `python local/sports1.py` or the relevant script).
+
+2. **Open the Command Palette in VS Code**
+  - Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (Mac).
+  - Type `Tunnel: Create Tunnel...` and select it.
+
+3. **Choose the port your API is running on**
+  - Enter the port number (e.g., `5000` or `8000`).
+
+4. **Copy the public tunnel URL**
+  - VS Code will generate a public URL (e.g., `https://<random-id>.devtunnels.ms:<port>`).
+  - Copy this URL.
+
+5. **Use the tunnel URL in Azure AI Foundry**
+  - Wherever you need to reference your API endpoint (e.g., in OpenAPI specs or webhooks), use the public tunnel URL instead of `localhost`.
+
+### Notes
+
+- The tunnel remains active as long as your local server and VS Code session are running.
+- You may need to sign in with a Microsoft account to use tunnels.
+- For more details, see the [VS Code Tunnels documentation](https://code.visualstudio.com/docs/remote/tunnels).
+
+This approach allows you to test integrations with Azure AI Foundry or any cloud service that needs to reach your local development environment.
 
 ## Understanding the Agent's Decision Making
 
